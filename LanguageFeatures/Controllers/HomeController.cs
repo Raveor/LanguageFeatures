@@ -11,23 +11,16 @@ namespace LanguageFeatures.Controllers
     {
         public ViewResult Index()
         {
-            /*List<string> results = new List<string>();
-            foreach(Product product in Product.GetProducts())
+            object[] data = new object[] { 275M, 29.95M, "jabłka", "pomarańcze", 100, 10 };
+            decimal total = 0;
+            for (int i = 0; i < data.Length; i++)
             {
-                string name = product?.Name ?? "<brak>";
-                decimal? price = product?.Price ?? 0;
-                string relatedName = product?.Related?.Name ?? "<brak>";
-                results.Add($"Produkt: {name}, cena: {price}, powiązanie {relatedName}");
+                if(data[i] is decimal d)
+                {
+                    total += d;
+                }
             }
-            return View(results);*/
-            
-            Dictionary<string, Product> products = new Dictionary<string, Product>
-            {
-                ["Kayak"] = new Product { Name = "Kajak", Price = 275M },
-                ["Lifejacket"] = new Product { Name = "Kamizelka ratunkowa", Price = 48.95M }
-
-            };
-            return View("Index", products.Keys);
+            return View("Index", new string[] { $"Razem: {total:C2}" });
         }
     }
 }
