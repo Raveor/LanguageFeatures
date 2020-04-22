@@ -22,8 +22,9 @@ namespace LanguageFeatures.Controllers
             };
 
             decimal cartTotal = cart.TotalPrices();
-            decimal arrayTotal = productArray.FilterByPrice(20).TotalPrices();
-            return View("Index", new string[] { $"Razem koszyk: {cartTotal:C2}", $"Razem tablica: {arrayTotal:C2}" });
+            decimal priceFilterTotal = productArray.FilterByPrice(20).TotalPrices();
+            decimal nameFilterTotal = productArray.FilterByName('P').TotalPrices();
+            return View("Index", new string[] { $"Razem według nazwy: {nameFilterTotal:C2}", $"Razem według wartości: {priceFilterTotal:C2}" });
         }
     }
 }
