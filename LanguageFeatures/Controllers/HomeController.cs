@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LanguageFeatures.Models;
 
 namespace LanguageFeatures.Controllers
 {
@@ -10,7 +11,15 @@ namespace LanguageFeatures.Controllers
     {
         public ViewResult Index()
         {
-            return View(new string[] { "C#", "Język", "Cechy" });
+            List<string> results = new List<string>();
+            foreach(Product product in Product.GetProducts())
+            {
+                string name = product?.Name ?? "<brak>";
+                decimal? price = product?.Price ?? 0;
+                string relatedName = product?.Related?.Name ?? "<brak>";
+                results.Add($"Produkt: {name}, cena: {price}, powiązanie {relatedName}");
+            }
+            return View(results);
         }
     }
 }
