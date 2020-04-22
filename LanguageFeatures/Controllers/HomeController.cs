@@ -11,7 +11,7 @@ namespace LanguageFeatures.Controllers
     {
         public ViewResult Index()
         {
-            List<string> results = new List<string>();
+            /*List<string> results = new List<string>();
             foreach(Product product in Product.GetProducts())
             {
                 string name = product?.Name ?? "<brak>";
@@ -19,7 +19,14 @@ namespace LanguageFeatures.Controllers
                 string relatedName = product?.Related?.Name ?? "<brak>";
                 results.Add($"Produkt: {name}, cena: {price}, powiązanie {relatedName}");
             }
-            return View(results);
+            return View(results);*/
+            
+            Dictionary<string, Product> products = new Dictionary<string, Product>
+            {
+                { "Kayak", new Product {Name = "Kajak", Price = 275M} },
+                { "Lifejacket", new Product {Name = "Kamizelka ratunkowa", Price = 48.95M } }
+            };
+            return View("Index", products.Keys);
         }
     }
 }
