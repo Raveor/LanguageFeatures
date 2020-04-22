@@ -23,8 +23,9 @@ namespace LanguageFeatures.Controllers
             
             Dictionary<string, Product> products = new Dictionary<string, Product>
             {
-                { "Kayak", new Product {Name = "Kajak", Price = 275M} },
-                { "Lifejacket", new Product {Name = "Kamizelka ratunkowa", Price = 48.95M } }
+                ["Kayak"] = new Product { Name = "Kajak", Price = 275M },
+                ["Lifejacket"] = new Product { Name = "Kamizelka ratunkowa", Price = 48.95M }
+
             };
             return View("Index", products.Keys);
         }
