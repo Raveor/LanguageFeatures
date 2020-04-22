@@ -9,18 +9,16 @@ namespace LanguageFeatures.Controllers
 {
     public class HomeController : Controller
     {
-        public async Task<ViewResult> Index()
+        public ViewResult Index()
         {
-            /*var products = new[]
+            var products = new[]
             {
                 new { Name = "Kajak", Price = 275M },
                 new { Name = "Kamizelka ratunkowa", Price = 48.95M },
                 new { Name = "Piłka nożna", Price = 19.50M },
                 new { Name = "Flaga narożna", Price = 34.95M },
             };
-            return View(products.Select(p => p.GetType().Name));*/
-            long? length = await MyAsyncMethods.GetPageLength();
-            return View(new string[] { $"Długość: {length}" });
+            return View(products.Select(p => $"{nameof(p.Name)}: {p.Name}, {nameof(p.Price)}: {p.Price}"));
         }
     }
 }
