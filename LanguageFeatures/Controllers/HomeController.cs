@@ -9,6 +9,11 @@ namespace LanguageFeatures.Controllers
 {
     public class HomeController : Controller
     {
+        bool FilterByPrice(Product product)
+        {
+            return (product?.Price ?? 0) >= 20;
+        }
+
         public ViewResult Index()
         {
             ShoppingCart cart = new ShoppingCart { Products = Product.GetProducts() };
@@ -22,8 +27,12 @@ namespace LanguageFeatures.Controllers
             };
 
             decimal cartTotal = cart.TotalPrices();
-            decimal priceFilterTotal = productArray.FilterByPrice(20).TotalPrices();
-            decimal nameFilterTotal = productArray.FilterByName('P').TotalPrices();
+            Func<Product, bool> nameFilter = delegate (Product product)
+            {
+                return product?.Name?[0] == 'P';
+            };
+            decimal priceFilterTotal = productArray.Filter(FilterByPrice).TotalPrices();
+            decimal nameFilterTotal = productArray.Filter(nameFilter).TotalPrices();
             return View("Index", new string[] { $"Razem według nazwy: {nameFilterTotal:C2}", $"Razem według wartości: {priceFilterTotal:C2}" });
         }
     }

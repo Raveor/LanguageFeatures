@@ -17,26 +17,16 @@ namespace LanguageFeatures.Models
             return total;
         }
 
-        public static IEnumerable<Product> FilterByPrice(this IEnumerable<Product> products, decimal minimumPrice)
+        public static IEnumerable<Product> Filter(this IEnumerable<Product> products, Func<Product, bool> selector)
         {
-            foreach (Product product in products)
+            foreach(Product product in products)
             {
-                if((product?.Price ?? 0) >= minimumPrice)
+                if(selector(product))
                 {
                     yield return product;
                 }
             }
         }
 
-        public static IEnumerable<Product> FilterByName(this IEnumerable<Product> products, char firstLetter)
-        {
-            foreach(Product product in products)
-            {
-                if(product?.Name?[0] == firstLetter)
-                {
-                    yield return product;
-                }
-            }
-        }
     }
 }
